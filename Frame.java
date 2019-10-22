@@ -12,12 +12,15 @@ public class Frame {
     public JButton button;
     public JTextField textField;
     public JTextField textField2;
+    public JTextField textField3;
     public JLabel label;
     public JLabel label2;
     private int randomNum;
-    private int randomValue;
+    private int randomMinValue;
+    private int randomMaxValue;
     private Boolean isClick = false;
     private Random random;
+    //可视化界面
     public void init(){
         frame = new JFrame();
         frame.setTitle("随机数");
@@ -29,30 +32,37 @@ public class Frame {
         label = new JLabel();
         label.setText("随机数范围");
         textField = new JTextField(5);
+        textField.setText("最小值");
+        textField2 = new JTextField(5);
+        textField2.setText("最大值");
         panel.add(label);
         panel.add(textField);
+        panel.add(textField2);
         //
         panel2 = new JPanel();
-        textField2 = new JTextField(5);
+        textField3 = new JTextField(5);
         label2 = new JLabel();
         label2.setText("随机数数量");
         panel2.add(label2);
-        panel2.add(textField2);
+        panel2.add(textField3);
         //
         panel3 = new JPanel();
         button = new JButton();
         button.setText("提交");
+        //添加监听
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                    isClick = true;
-                   randomValue = Integer.parseInt(textField.getText());
-                   randomNum = Integer.parseInt(textField2.getText());
+                   //获取文本域中内容
+                   randomMinValue = Integer.parseInt(textField.getText());
+                   randomMaxValue = Integer.parseInt(textField2.getText());
+                   randomNum = Integer.parseInt(textField3.getText());
                    random = new Random();
                    random.setPath("F:\\");
                    random.setFilename("123");
                    random.setFiletype(".txt");
-                   ArrayList arrayList= random.Randomnum(randomValue,randomNum);
+                   ArrayList arrayList= random.Randomnum(randomMinValue,randomMaxValue,randomNum);
                    random.fileInputRandom(arrayList);
             }
         });
@@ -74,12 +84,20 @@ public class Frame {
         this.randomNum = randomNum;
     }
 
-    public int getRandomValue() {
-        return randomValue;
+    public int getRandomMinValue() {
+        return randomMinValue;
     }
 
-    public void setRandomValue(int randomValue) {
-        this.randomValue = randomValue;
+    public void setRandomMinValue(int randomMinValue) {
+        this.randomMinValue = randomMinValue;
+    }
+
+    public int getRandomMaxValue() {
+        return randomMaxValue;
+    }
+
+    public void setRandomMaxValue(int randomMaxValue) {
+        this.randomMaxValue = randomMaxValue;
     }
 
     public Boolean getClick() {

@@ -30,14 +30,14 @@ public class Random {
        return value;
    }
 //   通过Random函数获取随机数并存入数组当中
-   public ArrayList Randomnum (int interval,int randomNumber){
+   public ArrayList Randomnum (int min,int max,int randomNumber){
        java.util.Random random = new java.util.Random();
-       num=random.nextInt(interval);
-       System.out.println("随机数范围："+interval);
+       System.out.println("随机数范围："+min+"～"+max);
        System.out.println("选取随机数数量："+randomNumber);
        randomNumList =new ArrayList<Integer>();
        for(int i=0;i<randomNumber;i++){
-           num=random.nextInt(interval);
+           //随机数取值范围min～max
+           num=random.nextInt(max-min+1)+min;
            randomNumList.add(num);
        }
        return randomNumList;
@@ -54,7 +54,7 @@ public class Random {
                fileWriter.write(randomstr+"\r\n");
            }
            fileWriter.close();
-           System.out.println("随机数以写入");
+           System.out.println("随机数已写入");
        } catch (IOException e) {
            e.printStackTrace();
        }
